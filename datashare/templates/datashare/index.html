@@ -1,10 +1,11 @@
-<!-- リスト3-10:datashare/templates/datashare/index.html -->
 {% extends 'datashare/base.html' %}
 {% block title %}{{ title }}{% endblock %}
 {% block contents %}
     <p>{{ msg }}</p>
     <p><a href="{% url goto_mypage %}">My Pageへ</a></p>
-    <p><a href="{% url 'datashare:frmPublish' %}">投稿Pageへ</a>
-       <a href="{% url goto_mypage_db %}">MyPageへ(DB接続)</a>
-    </p> <!-- リスト4-15:追加 -->
+    <!-- リスト4-15:追加 -->
 {% endblock %}
+
+<!-- リスト3-10:datashare/templates/datashare/index.html -->
+    <!--<p><a href="{% url goto_mypage_db %}">MyPageへ(DB接続)</a></p>-->
+    <!--<p><a href="{% url goto_frmPublish %}">投稿Pageへ</a></p>-->

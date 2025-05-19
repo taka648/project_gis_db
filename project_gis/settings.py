@@ -28,7 +28,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "datashare" # 3.2.3 Djangoアプリの登録
+    "datashare",  # 3.2.3 Djangoアプリの登録
 ]
 
 MIDDLEWARE = [
@@ -64,20 +64,20 @@ WSGI_APPLICATION = "project_gis.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-#DATABASES = {
+# DATABASES = {
 #    "default": {
 #        "ENGINE": "django.db.backends.sqlite3",
 #        "NAME": BASE_DIR / "db.sqlite3",
 #    }
-#}
+# }
 # リスト4-2:projcct_gis/settings.py
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'project_gis_db',
-        'USER': 'taka648',
-        'PASSWORD': 'Akie2Suzuki',
-        'PORT': '5432',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "project_gis_db",
+        "USER": "taka648",
+        "PASSWORD": "Akie2Suzuki",
+        "PORT": "5432",
     }
 }
 
@@ -106,8 +106,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # LANGUAGE_CODE = "en-us"
 # TIME_ZONE = "UTC"
-LANGUAGE_COOE = 'ja'     # リスト4-8:修正 
-TIME_ZONE = 'Asia/Tokyo' # リスト4-8:修正
+LANGUAGE_COOE = "ja"  # リスト4-8:修正
+TIME_ZONE = "Asia/Tokyo"  # リスト4-8:修正
 
 
 USE_I18N = True
@@ -124,5 +124,5 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-MEDIA_URL = "/media/"                        # リスト4-8:追加
-MEDIA_ROOT = os.path.join(BASE_DIR, "media") # リスト4-8:追加
+MEDIA_URL = "media/"  # リスト4-8:追加
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")  # リスト4-8:追加

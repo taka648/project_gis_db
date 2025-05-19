@@ -1,9 +1,8 @@
-<!-- リスト4-15:templates/datashare/mypage_db.html -->
-{% extneds 'datashare/base.html' %}
+{% extends 'datashare/base.html' %}
 {% block title  %}{{ title }}{% endblock %}
 {% block contents %}
-    <p>{{ msg|safe }}</p>
-    <table border="1" style="border-collapse: collapse; border-color: ■#000000">
+    <p>{{ msg | safe }}</p>
+    <table border="1" style="border-collapse: collapse; border-color: ■000000">
         <tr>
             <th>ID</th>
             <th>Sender</th>
@@ -18,7 +17,7 @@
             <td>{{ item.sender }}</td>
             <td>{{ item.project }}</td>
             <td>{{ item.send_message }}</td>
-            <td><a href="http://localhost:8000/media/{{ item.send_document }}"
+            <td><a href="http://localhost:8000/media/{{ item.send_document }}">
                 {{ item.send_document }}</a></td>
             <td>{{ item.send_date }}</td>
         </tr> 
@@ -28,3 +27,5 @@
     <p><a href="% url goto_publish_db %">投稿サイトへ(DB接続)</a> 
        <a href="% url goto_index %">Indexへ戻る</a></p>
 {% endblock %}
+
+<!-- リスト4-15:templates/datashare/mypage_db.html -->
