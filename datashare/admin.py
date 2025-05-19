@@ -1,3 +1,5 @@
+# リスト4-7:datashare/admin.py
 from django.contrib import admin
+from .models import pub_message
 
-# Register your models here.
+admin.site.register(pub_message) # リスト4-7:追加
