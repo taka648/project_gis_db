@@ -1,0 +1,8 @@
+<!-- リスト3-11:datashare/templates/datashare/mypage.html -->
+{% extends 'datashare/base.html' %}
+{% block title %}{{ title }}{% endblock %}
+{% block contents %}
+    <p>{{ msg }}</p>
+    <p><a href="{% url goto_index %}">Indexへ戻る</a></p>
+    <p><a href="{% url 'datashare:frmPublish' %}">投稿Pageへ</a></p>
+{% endblock %}
