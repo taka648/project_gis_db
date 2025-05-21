@@ -11,6 +11,7 @@ urlpatterns = [
     path("datashare/", include("datashare.urls")),  # リスト3-2:追加
 ]
 
-# リスト4-9:追加
-# if settings.DEBUG:
-#    urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+# 4.4.3 モデルのデータベース実装、手順2:ルーティングファイルヘの追記項目
+# リスト4-9:追加。MEDIA_URLとMEDIA_ROOTへの紐付けを設定する。
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

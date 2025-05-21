@@ -2,10 +2,18 @@
 {% block title %}{{ title }}{% endblock %}
 {% block contents %}
     <p>{{ msg }}</p>
-    <p>{{ answer | safe }}</p>
+    <p>{{ answer | safe }}</p> 
+    <!-- 変数answerの情報をHTMLに書き出すとき、行5のタグ名<p>~</p>も含めて書き出すように指示する。-->
+    <!-- つまり、HTML上の表示形式を保つために、変数answerの値とHTMLのタグを同時に書き出す-->
+
+    <!-- form送信先の指定、ここでは名前空間を用いたURL -->
     <form action="{% url 'datashare:frmPublish' %}" method="post">
+        <!-- 大量の偽造リクエストによるWebフォームヘの攻撃を防ぐための措置。セキュリティ上欠かせない大事な記述項目。-->
         {% csrf_token %}
+        
+        <!-- formの項目を成形しながら表示する -->
         <table> 
+            <!-- ormのフィールドをテープルのように成形し表示する-->
             {{ form.as_table }}
            <tr>
                <td></td>
