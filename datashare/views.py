@@ -3,9 +3,15 @@ from datashare.forms import (
     frmPublish,
     frmModelPublish,
 )  # リスト4-13:frmModelPublish追加 # リスト3-13:追加
+
+from django.contrib.auth.mixins import LoginRequiredMixin   # リスト4-37:追加
+
 from django.views.generic import TemplateView  # リスト3-13:追加。
 from .models import pub_message  # リスト4-13:追加。、モデルpub_messageをインポートする。
 from .forms import frmModelPublish  # リスト4-17:追加
+
+from .forms import frmModelPublish, LoginForm               # リスト4-37:追加
+from django.contrib.auth.views import LoginView, LogoutView # リスト4-37:追加
 
 
 def index(request):
@@ -72,7 +78,19 @@ class frmPublishView(TemplateView):
 # リスト3-13は、フォームと連動した動的な配信を対応するビュークラスであり、getとpostの2つの配信状態を踏まえ、
 # __init__()、get()とpost()、3つの関数を設けた。
 # それに対し、リスト4-13は、(1)モデルとの連動、(2)get関数による梢報収集のみであり、post関数による1青報の配信はない。
-class mypage_dbView(TemplateView):
+#
+# リスト4-37:追加修正。4.6.2 アプリケーションdatashareにおけるユーザ認証機能の実装、手順2:
+# リスト4-30:accoun1/vicws.pyを参照し、datashare/views.pyに値する修正と追加を行った。
+# まず、ユーザ認証に必要なフォームクラス、モデルとコンポーネントをインポートする(行3、行6と行7)。
+# 次は、マイページmypage_dbViewに対し、
+#
+# ①ユーザ認証LoginRequiredMixinの記述追加(行27)、
+# ②ログインが成功したとき、ユーザ情報の取得(行32)、
+# ③ログアウトページヘのリンク追加(行38)、
+#
+# 3つの追加記述を行う。
+# class mypage_dbView(TemplateView):
+class mypage_dbView(LoginRequiredMixin, TemplateView): # リスト4-37:追加修正
     # 紐付け先mypage_db.htmlのパスを明記する。
     template_name = "datashare/mypage_db.html"
 
@@ -84,15 +102,19 @@ class mypage_dbView(TemplateView):
     # 次の行35～行37は、ページmypage_db.htmlに表示したい情報や、トップページindexへの名前空間URLを変数contextに渡す。
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context["user"] = self.request.user               # リスト4-37:追加
         context["pub_message_list"] = pub_message.objects.all().order_by("id")
 
         context["title"] = "地理空間データの共有サイト"
         context["msg"] = "これはマイページ(DB接続)です"
-        context["goto_index"] = "datashare:index"
+        # リスト4-37:修正
+        # context["goto_index"] = "datashare:index"
+        context["goto_publish_db"] = 'datashare:publish db'
+        context["goto_logout"] = 'datashare:logout'       # リスト4-37:追加
         return context
 
 
-# リスト4-17:追加
+# リスト4-17:追加。4.5.2情報発信とファイルァップロードの機能実装、手順1:アプリdatashareのforms.pyの記述追加
 def publish_byModelfrmView(request):
     if request.method == "POST":
         form = frmModelPublish(request.POST, request.FILES)
@@ -111,7 +133,7 @@ def publish_byModelfrmView(request):
     return render(request, "datashare/publish_db.html", parmas)
 
 
-# リスト4-21:新規追加
+# リスト4-21:新規追加。4.5.3 情報更新と削除の機能実装、手順1:アプリdatashare/views.pyへの記述追加
 def edit(request, num):
     obj = pub_message.objects.get(id=num)
     if request.method == "POST":
@@ -133,3 +155,12 @@ def edit(request, num):
     }
 
     return render(request, "datashare/edit.html", parmas)
+
+# リスト4-37:追加修正。4.6.2 アプリケーションdatashareにおけるユーザ認証機能の実装、手順2:
+# 行98～行103の記述は、リスト4-30:accoun1/vicws.pyと同様、それぞれログインページとログアウトページヘの紐付けを設定する。
+class MyLoginView(LoginView):
+    form_class = LoginForm
+    template_name = 'datashare/login.html'
+ 
+class MyLogoutView(LogoutView):
+    template_name = 'datashare/logout.html'

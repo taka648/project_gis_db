@@ -9,6 +9,7 @@ from django.urls import path, include  # リスト3-2:includeを追加
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("datashare/", include("datashare.urls")),  # リスト3-2:追加
+    path("account/", include('account.urls'))       # リスト4-28:追加。4.6.1 ユーザ認証のテスト実装、手順3:アプリケーションaccountへのpathを追加する
 ]
 
 # 4.4.3 モデルのデータベース実装、手順2:ルーティングファイルヘの追記項目

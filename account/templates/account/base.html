@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <title>{% block title %}{% endblock %}</tltle>
+    </head>
+
+    <body> 
+        <h1>地理空間情報の共有サイト</h1>
+            {% if not user.is_authenticated %}
+                <p><a href="{% url 'account:top' %}">Top</a></p>
+            {% else %}
+                <a href="{% url 'acount:logout' %}">Logout</a></p>
+            {% endif %}
+        {% block contents %}{% endblock %}
+    </body>
+</html> 
+
+<!-- リスト4-32:新規作成。4.6.1 ユーザ認証のテスト実装、手順7: -->
+<!-- リスト4-32は、3つのHTMLページ[top.html, login.html, outlogout.html]の共通部分を記述する。 -->
+<!-- 行9～行13の条件文は、認証結果により対応するリソクを張る。認証が成功しない場合、つまり[if not user.is.authenticated]なら(行9)、トップページヘのリンクを張る(行10)。 -->
+<!-- そうでない場合、ログアウトページヘのリンクを張る。 -->

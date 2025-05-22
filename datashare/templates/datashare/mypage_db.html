@@ -1,7 +1,8 @@
 {% extends 'datashare/base.html' %}
 {% block title  %}{{ title }}{% endblock %}
 {% block contents %}
-    <p>{{ msg | safe }}</p>
+    <!-- <p>{{ msg | safe }}</p> -->
+    <p>これは{{ user.username | safe }}のサイトです(DB接続)。</p>
     <table border="1" style="border-collapse: collapse; border-color: ■000000">
         <tr>
             <th>ID</th>
@@ -13,7 +14,8 @@
         </tr>
     {% for item in pub_message_list %}
         <tr>
-            <td>{{ item.id }}</td>
+            <!-- リスト4-23:修正。4.5.3 情報更新と削除の機能実装、手順3:mypage_db.htmlの修正 -->
+            <td><a href="{% url 'datashare:edit' item.id %}">Edit ID = {{ item.id }}</a></td>
             <td>{{ item.sender }}</td>
             <td>{{ item.project }}</td>
             <td>{{ item.send_message }}</td>
@@ -23,9 +25,16 @@
         </tr> 
     {% endfor %}
     </table>
-    <!-- リスト4-19:修正 -->
-    <p><a href="% url goto_publish_db %">投稿サイトへ(DB接続)</a> 
-       <a href="% url goto_index %">Indexへ戻る</a></p>
+    <!-- リスト4-19:修正。4.5.2 情報発信とファイルァップロードの機能実装、手順4:mypage_db.htmlの修正とpublish_db.html新規作成 -->
+    <p><a href="{% url 'datashare:publish_db' %}">投稿サイトへ(DB接続)</a> 
+       <!-- <a href="{% url 'datashare:index' %}">Indexへ戻る</a></p> -->
+       <a href="{% url 'datashare:logout' %}">Logoutへ</a></p>
 {% endblock %}
 
+<!-- 4.5.1 情報表示とファイルとダウンロードの機能実装、手順3:アプリdatashareのmypage_db.htmlの
+新規作成 -->
 <!-- リスト4-15:templates/datashare/mypage_db.html -->
+<!--    <p><a href="% url goto_publish_db %">投稿サイトへ(DB接続)</a>  -->
+<!--       <a href="% url goto_index %">Indexへ戻る</a></p> -->
+<!-- 4.6.2 アプリケーションdatashareにおけるユーザ認証機能の実装、手順4:関連のHTMLページの作成と修正 -->
+<!-- マイページmypage_db.htmlには、ユーザ1情報表示の追加(行4)、ログアウトページヘのリンク追加(行27)だけを加えた(リスト4-40)。 -->

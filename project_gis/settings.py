@@ -28,7 +28,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "datashare",  # 3.2.3 Djangoアプリの登録
+    "datashare",                  # 3.2.3 Djangoアプリの登録
+    "account.apps.AccountConfig", # リスト4-25:追加。4.6.1 ユーザ認証のテスト実装、手順1:アプリケーションaccountの登録
 ]
 
 MIDDLEWARE = [
@@ -46,10 +47,11 @@ ROOT_URLCONF = "project_gis.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": {os.path.join(BASE_DIR, 'templates')}, # リスト4-26:修正。
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
+                "django.template.context-processors.debug", # リスト4-26:追加。4.6.1 ユーザ認証のテスト実装、手順2:その他の修正と追加設定
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
@@ -122,7 +124,14 @@ STATIC_URL = "/static/"
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
+# 4.6.2 アプリケーションdatashareにおけるユーザ認証機能の実装、手順5:
+# project_gis/settings.pyに設定した[LOGIN_URL]と[LOGIN_REDIRECT_URL]を、それぞれ[datashare:login]と[datashare:mypage_db]に変更する。
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # 4.4.3 モデルのデータベース実装、手順1:必要な環境設定、(B)アプリのアップロードファイル保存先に関する環境設定
 MEDIA_URL = "/media/"                         # リスト4-8:追加
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")  # リスト4-8:追加
+# 4.6.1 ユーザ認証のテスト実装、手順2:その他の修正と追加設定
+LOGIN_URL = "account:login"          # リスト4-27:追加
+# LOGIN_REDIRECT_URL = 'account:top' # リスト4-27:追加
+LOGIN_REDIRECT_URL = "datashare:mypage_db" #リスト4-42:追加
+
