@@ -47,11 +47,12 @@ ROOT_URLCONF = "project_gis.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": {os.path.join(BASE_DIR, 'templates')}, # リスト4-26:修正。
+        #"DIRS": [],
+        "DIRS": {os.path.join(BASE_DIR, 'templates')}, # リスト4-26:修正。4.6.1 ユーザ認証のテスト実装、手順2:その他の修正と追加設定
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
-                "django.template.context-processors.debug", # リスト4-26:追加。4.6.1 ユーザ認証のテスト実装、手順2:その他の修正と追加設定
+                # "django.template.context-processors.debug",
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",

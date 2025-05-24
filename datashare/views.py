@@ -8,7 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin   # リスト4-37:追�
 
 from django.views.generic import TemplateView  # リスト3-13:追加。
 from .models import pub_message  # リスト4-13:追加。、モデルpub_messageをインポートする。
-from .forms import frmModelPublish  # リスト4-17:追加
+# from .forms import frmModelPublish  # リスト4-17:追加
 
 from .forms import frmModelPublish, LoginForm               # リスト4-37:追加
 from django.contrib.auth.views import LoginView, LogoutView # リスト4-37:追加
@@ -109,8 +109,10 @@ class mypage_dbView(LoginRequiredMixin, TemplateView): # リスト4-37:追加修
         context["msg"] = "これはマイページ(DB接続)です"
         # リスト4-37:修正
         # context["goto_index"] = "datashare:index"
-        context["goto_publish_db"] = 'datashare:publish db'
-        context["goto_logout"] = 'datashare:logout'       # リスト4-37:追加
+        context["goto_publish_db"] = "datashare:publish_db"
+        # リスト4-37:追加
+        context["goto_logout"] = "datashare:logout"
+
         return context
 
 
@@ -160,7 +162,7 @@ def edit(request, num):
 # 行98～行103の記述は、リスト4-30:accoun1/vicws.pyと同様、それぞれログインページとログアウトページヘの紐付けを設定する。
 class MyLoginView(LoginView):
     form_class = LoginForm
-    template_name = 'datashare/login.html'
- 
+    template_name = "datashare/login.html"
+
 class MyLogoutView(LogoutView):
-    template_name = 'datashare/logout.html'
+    template_name = "datashare/logout.html"

@@ -26,11 +26,16 @@
     {% endfor %}
     </table>
     <!-- リスト4-19:修正。4.5.2 情報発信とファイルァップロードの機能実装、手順4:mypage_db.htmlの修正とpublish_db.html新規作成 -->
-    <p><a href="{% url 'datashare:publish_db' %}">投稿サイトへ(DB接続)</a> 
-       <!-- <a href="{% url 'datashare:index' %}">Indexへ戻る</a></p> -->
-       <a href="{% url 'datashare:logout' %}">Logoutへ</a></p>
+    <p><a href="{% url goto_publish_db %}">投稿サイトへ(DB接続)</a>
+       <a href="{% url goto_logout %}">Logoutへ</a></p>
 {% endblock %}
 
+<!--   <form method="post" action="{% url 'datashare:logout' %}"></form>
+    {% csrf_token %}
+    <button type="submit">Logoutへ</button>-->
+
+       <!-- <a href="{% url 'datashare:index' %}">Indexへ戻る</a></p> -->
+       <!--<a href="{% url goto_logout %}">Logoutへ</a></p>-->
 <!-- 4.5.1 情報表示とファイルとダウンロードの機能実装、手順3:アプリdatashareのmypage_db.htmlの
 新規作成 -->
 <!-- リスト4-15:templates/datashare/mypage_db.html -->

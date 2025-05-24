@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="ja">
-    <head> 
+    <head>
         <meta charset="utf-8">
-        <title>login to MyPag</title>
-    </head> 
-    <body> 
+        <title>Login to MyPag</title>
+    </head>
+
+    <body>
         <h1>地理空間情報の共有サイト</h1>
         <h1>Login to MyPage</h1>
         <form action="", method="post">
@@ -16,12 +17,13 @@
             {% endfor %}
             <button type="submit">Login</button>
             <input type="hidden" name="nest" value="{{nest}}" />
-       {% csrf_token %}
+            {% csrf_token %}
        </form>
     </body>
 </html>
 
-<!-- # リスト4-39:新規作成。4.6.2 アプリケーションdatashareにおけるユーザ認証機能の実装、手順5: -->
+
+<!-- # リスト4-39:新規作成。4.6.2 アプリケーションdatashareにおけるユーザ認証機能の実装、手順4: -->
 <!-- 基本的には、リスト4-344:account/login.htmlと同じlogin.htmlを記述している。 -->
 <!-- 行10～行16は、for文を使用し、フォームの項目を順番に表示する。 -->
 <!-- for文の上に{{ form.non_field_errors }}という記述があるが(行11)、これは特定のフィールドに紐づかないエラーを表示するための記述である。 -->

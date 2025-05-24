@@ -17,11 +17,11 @@ from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
  
 class TopView(LoginRequiredMixin, TemplateView):
-    template_name = 'account/top.html'
+    template_name = "account/top.html"
 
 class MyLoginView(LoginView):
     form_class = LoginForm
-    template_name = 'account/login.html'
+    template_name = "account/login.html"
  
 class MyLogoutView(LogoutView):
-    template_name = 'account/logout.html'
+    template_name = "account/logout.html"
